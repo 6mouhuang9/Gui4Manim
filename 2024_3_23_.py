@@ -1740,5 +1740,5 @@ class {class_name}(Scene):
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = CrossCodeGenerator(root)
+    app = Arrow3DCodeGenerator(root)
     root.mainloop()
