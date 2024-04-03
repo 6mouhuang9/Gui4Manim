@@ -257,25 +257,10 @@ OBJECTS_PARAMS = {
         "color": {"default": "WHITE", "type": str, "validation": "color"},
         "position": {"default": [0, 0, 0], "type": "list", "validation": "coordinates"},
     },
-    #说起来这里还缺一个输入公式展示曲线的功能，这个功能是单拎出来还是集成到主界面呢？
-    #比方说，生成动画选项点击之后，再出现两个选项：生成动画、生成函数曲线这种？
-    #说起来，生成函数曲线怎么搞来着？
-    #用ParametricFunction
-    #https://infograph.tistory.com/56这种调调
-    #先定义para_function1
-    #func1 = lambda t: np.array([t, 0.5 * t,0])
-    #func2 = lambda t: np.array([t, 0.4*(t+3)*(t-2), 0])
-    #再定义graph = ParametricFunction(func_1) ...
-    #啧
 
     #有时候感觉cutout更像animations
 }
 
-#目前的这些动画效果估计只能执行控制自身位置以及出现形式，类似于ppt中的出现进入等，因为有些animations方法的参数是一个对象，但有些方法是两个对象，故而得区别处理
-#设置位置这个好说，move_to,shift,align_to都行，我推荐输入坐标，用move_to（已完成）
-#这个缩放...scale(),呃，应该也能处理，切片嘛，之后设置scale必须在最末尾之类的，主要是mobject内置太多set_方法，现在已经没时间重新处理了，诶，有个ScaleInPlace类，正好可以用
-#transform估计得单拎出来设置一个功能
-#以下面的功能为前提，设置一个新的数据结构，包含transform的两个类，顺便实现一下输入tex的相关功能，顺便把mathtex转latex集成进去
 animation_params_options = {
     "FadeIn": {"run_time": {"default": 2, "type": float, "validation": "positive"}},
     "FadeOut": {"run_time": {"default": 2, "type": float, "validation": "positive"}},
@@ -288,19 +273,11 @@ animation_params_options = {
     "Flash": {"run_time": {"default": 2, "type": float, "validation": "positive"}},
     "ShowPassingFlashWithThinningStrokeWidth": {"run_time": {"default": 2, "type": float, "validation": "positive"}},
     "FadeToColor": {"run_time": {"default": 2, "type": float, "validation": "positive"},    "color": {"default": "WHITE", "type": str, "validation": "color"},},
-    #等会，你这里的数字是直接输入的？不需要一个参数名称？测，这是个位置参数，不需要名称
-    #我之后试试加个判断，if type == ‘*args(或者改名叫arg)’,则直接输入value，不过那是切片时的事了
-    #诶，再等会，那不就是说所有参数是位置参数的都可以这么处理，那么上面的tex不就也可以这么搞？
-    #nice,已解决
     "ScaleInPlace": {"run_time": {"default": 2, "type": float, "validation": "positive"},
     "*arg": {"default": 2, "type": float, "validation": "positive"}},
-    #这个就好多了，没有位置参数
     "ShrinkToCenter": {"run_time": {"default": 2, "type": float, "validation": "positive"}},
-    #Transform系列的再说吧，新建一个页面搞吧
-    #MoveToTarget太麻烦了，不如直接用.shift().scale()
     "ApplyWave": {"run_time": {"default": 2, "type": float, "validation": "positive"},      "direction": {"default": [0,0,0], "type": "list", "validation": "position"},
     "time_width ": {"default": 1, "type": float, "validation": "positive"}},
-    #这什么玩意这到底
     #同伦类型论（homotopy type theory，缩写 HoTT）是一套旨在于同伦论的大框架下构建内涵类型论语义的理论，尤指Quillen模型范畴和弱分解系统。
     "Homotopy": {"run_time": {"default": 2, "type": float, "validation": "positive"}},
     "ComplexHomotopy": {"run_time": {"default": 2, "type": float, "validation": "positive"}},
