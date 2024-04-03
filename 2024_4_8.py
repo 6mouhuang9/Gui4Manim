@@ -1,11 +1,3 @@
-#接下来该处理VGroup以及transform相关的了
-#这个，transform类型的如何实现呢？
-#VGroup与Transform的联系紧密吗？    
-#之前最常用的是ReplacementTransformm,其实Transform与ReplacementTransform差不多
-#这个，相似点在于都是同时出现多个动画对象
-#之前的数据结构能不能用？有序号，有参数，那么首先确定要用VGroup，然后依次设定方法与参数，最后放在置于VGroup中，然后就能使用VGroup相关的各种范例，说实话，我突然感觉没什么意义，感觉只要加一个transform方法就行
-#哦对，还有一个生成函数图形的那个方法，也就是输入函数的方法ParameticFunction，输入函数顺便再与latex转换一下
-#是否需要另外搞一个transform_object_params,倒是可以说实话，不过不用多，先搞处理代码的部分吧
 
 import json
 import subprocess
@@ -20,8 +12,6 @@ def convert_to_latex(tex_string):
         latex_expr = latex(expr)
         return latex_expr
     except Exception as e:
-        # 如果有错误（例如，解析错误），返回原始字符串
-        # 这是一个简单的错误处理，可能需要根据具体需要进行调整
         print(f"转换为 LaTeX 时出错：{e}")
         return tex_string
 
@@ -46,10 +36,6 @@ def generate_transform_code(data):
         obj_name = f"object{index}"
         object_names.append(obj_name)
         
-        #这里是我打错了，不过之后的中文化也能这么处理
-        #if obj_type == "Mathtex":
-        #   obj_type = "MathTex"  # 调整名称以匹配Manim类名
-
         
         params_code = []
         for key, value in params.items():
@@ -76,8 +62,6 @@ def generate_transform_code(data):
     for obj_code in objects_code:
         code += f"        {obj_code}"
     
-    # 添加变换动画的代码
-    # 假设我们知道哪些对象要进行变换
     for i in range(0, len(object_names) - 1, 2):
         source_obj = object_names[i]
         target_obj = object_names[i + 1]
